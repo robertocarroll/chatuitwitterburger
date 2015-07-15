@@ -351,10 +351,10 @@ findAnswer = (msg, cb) ->
 			burger_hygiene = 'urgent improvement necessary'						
 		best_place = "One of the cleanest places around here is #{burger_name} on #{burger_address}. It's #{burger_hygiene} "	
 	else 
-		best_place = "FALLBACK"	
+		best_place = "#{user_query}"	
 	cb best_place
 
 module.exports = (robot) ->
-	robot.hear /(burger)? (.*)/i, (msg) ->
+	robot.hear /(burger) (.*)/i, (msg) ->
 		findAnswer msg, (best_place) ->
 			msg.send "#{best_place}" 
