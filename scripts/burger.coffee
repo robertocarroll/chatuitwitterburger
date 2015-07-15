@@ -230,6 +230,9 @@ best_place = null
 
 findAnswer = (msg, cb) ->
 	user_query = msg.match[2]
+	user_query1 = msg.match[0]
+	user_query2 = msg.match[1]
+	user_query3 = msg.match[3]
 	if user_query.match(/^(random|any)$/)
 		random_burger_places = shuffle (burger_places)
 		random_burger = random_burger_places[0]
@@ -351,7 +354,7 @@ findAnswer = (msg, cb) ->
 			burger_hygiene = 'urgent improvement necessary'						
 		best_place = "One of the cleanest places around here is #{burger_name} on #{burger_address}. It's #{burger_hygiene} "	
 	else 
-		best_place = "FALLBACK"	
+		best_place = "msg.match[2]: #{user_query} msg.match[0] #{user_query1} msg.match[1] #{user_query2}"	
 	cb best_place
 
 module.exports = (robot) ->
