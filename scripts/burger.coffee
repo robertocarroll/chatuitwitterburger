@@ -271,7 +271,20 @@ findAnswer = (msg, cb) ->
 		burger_name = lowest_burger[0].name 
 		burger_cost = lowest_burger[0].cost 
 		burger_address = lowest_burger[0].address
-		best_place = "The cheapest place is #{burger_name} on #{burger_address}."
+		burger_address = lowest_burger[0].address
+		if lowest_burger[0].rating >= 5
+			burger_rating = 'great'
+		else if lowest_burger[0].rating >= 4
+			burger_rating = 'good'
+		else if lowest_burger[0].rating >= 3
+			burger_rating = 'OK'
+		else if lowest_burger[0].rating >= 2
+			burger_rating = 'not bad'	
+		else if lowest_burger[0].rating >= 1
+			burger_rating = 'poor'		
+		else
+			burger_rating = 'not been rated'
+		best_place = "The cheapest place is #{burger_name} on #{burger_address}. It's #{burger_rating}. A burger costs £#{burger_cost}."
 	else if user_query.match(/^(near|nearest|close|closest)$/)
 		type = nearest	
 		filtered_burger = _.map(burger_places, (o) ->
@@ -292,7 +305,19 @@ findAnswer = (msg, cb) ->
 		burger_name = lowest_burger[0].name 
 		burger_cost = lowest_burger[0].cost 
 		burger_address = lowest_burger[0].address
-		best_place = "The nearest place is #{burger_name} on #{burger_address}."
+		if lowest_burger[0].rating >= 5
+			burger_rating = 'great'
+		else if lowest_burger[0].rating >= 4
+			burger_rating = 'good'
+		else if lowest_burger[0].rating >= 3
+			burger_rating = 'OK'
+		else if lowest_burger[0].rating >= 2
+			burger_rating = 'not bad'	
+		else if lowest_burger[0].rating >= 1
+			burger_rating = 'poor'		
+		else
+			burger_rating = 'not been rated'
+		best_place = "The nearest place is #{burger_name} on #{burger_address}. It's #{burger_rating}. A burger costs £#{burger_cost}."
 	else if user_query.match(/^(best|finest|super|great)$/)
 		type = best	
 		filtered_burger = _.map(burger_places, (o) ->
@@ -314,7 +339,19 @@ findAnswer = (msg, cb) ->
 		burger_name = random_best_burger[0].name 
 		burger_cost = random_best_burger[0].cost 
 		burger_address = random_best_burger[0].address
-		best_place = "One of the best places around here is #{burger_name} on #{burger_address}."	
+		if random_best_burger[0].rating >= 5
+			burger_rating = 'great'
+		else if random_best_burger[0].rating >= 4
+			burger_rating = 'good'
+		else if random_best_burger[0].rating >= 3
+			burger_rating = 'OK'
+		else if random_best_burger[0].rating >= 2
+			burger_rating = 'not bad'	
+		else if random_best_burger[0].rating >= 1
+			burger_rating = 'poor'		
+		else
+			burger_rating = 'not been rated'
+		best_place = "One of the best places around here is #{burger_name} on #{burger_address}. It's rated as #{burger_rating}."	
 	else if user_query.match(/^(cleanest|clean)$/)
 		type = cleanest	
 		filtered_burger = _.map(burger_places, (o) ->
@@ -336,6 +373,7 @@ findAnswer = (msg, cb) ->
 		random_best_burger = shuffle (highest_burger)
 		burger_name = random_best_burger[0].name 
 		burger_cost = random_best_burger[0].cost 
+		burger_address = random_best_burger[0].address 
 		burger_hygiene = random_best_burger[0].hygiene
 		if burger_hygiene >= 5
 			burger_hygiene = 'very good'
@@ -349,9 +387,9 @@ findAnswer = (msg, cb) ->
 			burger_hygiene = 'major improvement necessary'
 		else 
 			burger_hygiene = 'urgent improvement necessary'						
-		best_place = "One of the cleanest places around here is #{burger_name} on #{burger_address}. It's #{burger_hygiene} "	
+		best_place = "One of the cleanest places around here is #{burger_name} on #{burger_address}. It's rated as #{burger_hygiene}."	
 	else 
-		best_place = "#{user_query}"	
+		best_place = "Sorry, I didn't understand that. Please try 'burger' then 'best', 'cleanest', 'nearest', 'cheapest' or 'random'."	
 	cb best_place
 
 module.exports = (robot) ->
